@@ -23,10 +23,8 @@ var getTimeline = (req,res) => {
 }
 
 var getSearch = (req,res) => {
-  // let search = req.body.search
-  // console.log(search);
   oauth.get(
-    `https://api.twitter.com/1.1/search/tweets.json?q=${req.body.search}&count=${+req.body.count}`,
+    `https://api.twitter.com/1.1/search/tweets.json?q=${req.body.search}`,
     `${process.env.TOKEN}`,
     `${process.env.TOKEN_SECRET}`,
     function (err, data){
@@ -35,7 +33,21 @@ var getSearch = (req,res) => {
     });
 }
 
+var postTweet = (req,res) => {
+  oauth.post(
+    `https://api.twitter.com/1.1/statuses/update.json?status=${req.body.search}`,
+    `${process.env.TOKEN}`, //test user token
+    `${process.env.TOKEN_SECRET}`, //test user secret
+    `${req.body.search}`,
+    "txt",
+    function (e, data){
+      if (e) console.error(e);
+      console.log(data);
+    });
+}
+
 module.exports = {
   getTimeline,
-  getSearch
+  getSearch,
+  postTweet
 }

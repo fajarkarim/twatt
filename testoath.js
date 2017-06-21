@@ -12,10 +12,12 @@ var oauth = new OAuth.OAuth(
   null,
   'HMAC-SHA1'
 );
-oauth.get(
-  `https://api.twitter.com/1.1/search/tweets.json?q=trumph`,
+oauth.post(
+  `https://api.twitter.com/1.1/statuses/update.json?status=aku+mau+lalala`,
   `${process.env.TOKEN}`, //test user token
   `${process.env.TOKEN_SECRET}`, //test user secret
+  `aku mau lalala`,
+  "lala",
   function (e, data){
     if (e) console.error(e);
     // console.log((JSON.stringify(res)));
